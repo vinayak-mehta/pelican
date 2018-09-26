@@ -348,8 +348,7 @@ class Content(object):
     def content(self):
         return self.get_content(self.get_siteurl())
 
-    @memoized
-    def get_summary(self, siteurl):
+    def get_summary(self, siteurl, featured=False):
         """Returns the summary of an article.
 
         This is based on the summary metadata if set, otherwise truncate the
@@ -358,15 +357,24 @@ class Content(object):
         if 'summary' in self.metadata:
             return self.metadata['summary']
 
-        if self.settings['SUMMARY_MAX_LENGTH'] is None:
+        if featured:
+            key = 'FEATURED_SUMMARY_MAX_LENGTH'
+        else:
+            key = 'SUMMARY_MAX_LENGTH'
+        
+        if self.settings[key] is None:
             return self.content
 
         return truncate_html_words(self.content,
-                                   self.settings['SUMMARY_MAX_LENGTH'])
+                                   self.settings[key])
 
     @property
     def summary(self):
         return self.get_summary(self.get_siteurl())
+
+    @property
+    def featured_summary(self):
+        return self.get_summary(self.get_siteurl(), featured=True)
 
     def _get_summary(self):
         """deprecated function to access summary"""
