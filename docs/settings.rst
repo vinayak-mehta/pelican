@@ -1,8 +1,8 @@
 Settings
 ########
 
-Pelican is configurable thanks to a settings file you can pass to
-the command line::
+Pelican is configurable thanks to a settings file you can pass to the command
+line::
 
     pelican content -s path/to/your/pelicanconf.py
 
@@ -11,15 +11,21 @@ be named ``pelicanconf.py`` by default.
 
 .. note::
 
-   When experimenting with different settings (especially the metadata
-   ones) caching may interfere and the changes may not be visible. In
-   such cases disable caching with ``LOAD_CONTENT_CACHE = False`` or
-   use the ``--ignore-cache`` command-line switch.
+   When experimenting with different settings (especially the metadata ones)
+   caching may interfere and the changes may not be visible. In such cases
+   disable caching with ``LOAD_CONTENT_CACHE = False`` or use the
+   ``--ignore-cache`` command-line switch.
 
 Settings are configured in the form of a Python module (a file). There is an
 `example settings file
 <https://github.com/getpelican/pelican/raw/master/samples/pelican.conf.py>`_
 available for reference.
+
+To see a list of current settings in your environment, including both default
+and any customized values, run the following command (append one or more
+specific setting names as arguments to see values for those settings only)::
+
+    pelican --print-settings
 
 All the setting identifiers must be set in all-caps, otherwise they will not be
 processed. Setting values that are numbers (5, 20, etc.), booleans (True,
@@ -28,10 +34,9 @@ quotation marks. All other values (i.e., strings) *must* be enclosed in
 quotation marks.
 
 Unless otherwise specified, settings that refer to paths can be either absolute
-or relative to the configuration file.
-
-The settings you define in the configuration file will be passed to the
-templates, which allows you to use your settings to add site-wide content.
+or relative to the configuration file. The settings you define in the
+configuration file will be passed to the templates, which allows you to use
+your settings to add site-wide content.
 
 Here is a list of settings for Pelican:
 
@@ -84,8 +89,8 @@ Basic settings
 .. data:: JINJA_ENVIRONMENT = {'trim_blocks': True, 'lstrip_blocks': True}
 
    A dictionary of custom Jinja2 environment variables you want to use. This
-   also includes a list of extensions you may want to include.
-   See `Jinja Environment documentation`_.
+   also includes a list of extensions you may want to include. See `Jinja
+   Environment documentation`_.
 
 .. data:: JINJA_FILTERS = {}
 
@@ -207,8 +212,8 @@ Basic settings
    your SITEURL; if you do not, feeds will not be generated with
    properly-formed URLs. If your site is available via HTTPS, this setting
    should begin with ``https://`` — otherwise use ``http://``. Then append your
-   domain, with no trailing slash at the end.
-   Example: ``SITEURL = 'https://example.com'``
+   domain, with no trailing slash at the end. Example: ``SITEURL =
+   'https://example.com'``
 
 .. data:: STATIC_PATHS = ['images']
 
@@ -234,17 +239,17 @@ Basic settings
 
 .. data:: STATIC_CREATE_LINKS = False
 
-   Create links instead of copying files. If the content and output
-   directories are on the same device, then create hard links.  Falls
-   back to symbolic links if the output directory is on a different
-   filesystem. If symlinks are created, don't forget to add the ``-L``
-   or ``--copy-links`` option to rsync when uploading your site.
+   Create links instead of copying files. If the content and output directories
+   are on the same device, then create hard links.  Falls back to symbolic
+   links if the output directory is on a different filesystem. If symlinks are
+   created, don't forget to add the ``-L`` or ``--copy-links`` option to rsync
+   when uploading your site.
 
 .. data:: STATIC_CHECK_IF_MODIFIED = False
 
-   If set to ``True``, and ``STATIC_CREATE_LINKS`` is ``False``, compare
-   mtimes of content and output files, and only copy content files that
-   are newer than existing output files.
+   If set to ``True``, and ``STATIC_CREATE_LINKS`` is ``False``, compare mtimes
+   of content and output files, and only copy content files that are newer than
+   existing output files.
 
 .. data:: TYPOGRIFY = False
 
@@ -342,11 +347,11 @@ URL settings
 ============
 
 The first thing to understand is that there are currently two supported methods
-for URL formation: *relative* and *absolute*. Relative URLs are useful
-when testing locally, and absolute URLs are reliable and most useful when
+for URL formation: *relative* and *absolute*. Relative URLs are useful when
+testing locally, and absolute URLs are reliable and most useful when
 publishing. One method of supporting both is to have one Pelican configuration
-file for local development and another for publishing. To see an example of this
-type of setup, use the ``pelican-quickstart`` script as described in the
+file for local development and another for publishing. To see an example of
+this type of setup, use the ``pelican-quickstart`` script as described in the
 :doc:`Installation <install>` section, which will produce two separate
 configuration files for local development and publishing, respectively.
 
@@ -360,8 +365,8 @@ and pages anywhere you want.
 .. note::
     If you specify a ``datetime`` directive, it will be substituted using the
     input files' date metadata attribute. If the date is not specified for a
-    particular file, Pelican will rely on the file's ``mtime`` timestamp.
-    Check the `Python datetime documentation`_ for more information.
+    particular file, Pelican will rely on the file's ``mtime`` timestamp. Check
+    the `Python datetime documentation`_ for more information.
 
 .. _Python datetime documentation:
     http://docs.python.org/2/library/datetime.html#strftime-and-strptime-behavior
@@ -382,10 +387,9 @@ Example usage::
    PAGE_SAVE_AS = 'pages/{slug}/index.html'
 
 This would save your articles into something like
-``/posts/2011/Aug/07/sample-post/index.html``,
-save your pages into ``/pages/about/index.html``, and render them available at
-URLs of ``/posts/2011/Aug/07/sample-post/`` and ``/pages/about/``,
-respectively.
+``/posts/2011/Aug/07/sample-post/index.html``, save your pages into
+``/pages/about/index.html``, and render them available at URLs of
+``/posts/2011/Aug/07/sample-post/`` and ``/pages/about/``, respectively.
 
 .. data:: RELATIVE_URLS = False
 
@@ -514,27 +518,6 @@ respectively.
    The URL to use for per-day archives of your posts. Used only if you have the
    ``{url}`` placeholder in ``PAGINATION_PATTERNS``.
 
-.. data:: SLUG_SUBSTITUTIONS = ()
-
-   Substitutions to make prior to stripping out non-alphanumerics when
-   generating slugs. Specified as a list of 3-tuples of ``(from, to, skip)``
-   which are applied in order. ``skip`` is a boolean indicating whether or not
-   to skip replacement of non-alphanumeric characters.  Useful for backward
-   compatibility with existing URLs.
-
-.. data:: AUTHOR_SUBSTITUTIONS = ()
-
-   Substitutions for authors. ``SLUG_SUBSTITUTIONS`` is not taken into account
-   here!
-
-.. data:: CATEGORY_SUBSTITUTIONS = ()
-
-   Added to ``SLUG_SUBSTITUTIONS`` for categories.
-
-.. data:: TAG_SUBSTITUTIONS = ()
-
-   Added to ``SLUG_SUBSTITUTIONS`` for tags.
-
 .. note::
 
     If you do not want one or more of the default pages to be created (e.g.,
@@ -542,29 +525,12 @@ respectively.
     set the corresponding ``*_SAVE_AS`` setting to ``''`` to prevent the
     relevant page from being generated.
 
-.. note::
-
-    Substitutions are applied in order with the side effect that keeping
-    non-alphanum characters applies to the whole string when a replacement
-    is made.
-
-    For example if you have the following setting::
-
-       SLUG_SUBSTITUTIONS = (('C++', 'cpp'), ('keep dot', 'keep.dot', True))
-
-    the string ``Keep Dot`` will be converted to ``keep.dot``, however
-    ``C++ will keep dot`` will be converted to ``cpp will keep.dot`` instead
-    of ``cpp-will-keep.dot``!
-
-    If you want to keep non-alphanum characters only for tags or categories
-    but not other slugs then configure ``TAG_SUBSTITUTIONS`` and
-    ``CATEGORY_SUBSTITUTIONS`` respectively!
-
 Pelican can optionally create per-year, per-month, and per-day archives of your
 posts. These secondary archives are disabled by default but are automatically
-enabled if you supply format strings for their respective ``_SAVE_AS`` settings.
-Period archives fit intuitively with the hierarchical model of web URLs and can
-make it easier for readers to navigate through the posts you've written over time.
+enabled if you supply format strings for their respective ``_SAVE_AS``
+settings. Period archives fit intuitively with the hierarchical model of web
+URLs and can make it easier for readers to navigate through the posts you've
+written over time.
 
 Example usage::
 
@@ -577,9 +543,8 @@ posts for the month at ``posts/2011/Aug/index.html``.
 
 .. note::
     Period archives work best when the final path segment is ``index.html``.
-    This way a reader can remove a portion of your URL and automatically
-    arrive at an appropriate archive of posts, without having to specify
-    a page name.
+    This way a reader can remove a portion of your URL and automatically arrive
+    at an appropriate archive of posts, without having to specify a page name.
 
 ``DIRECT_TEMPLATES`` work a bit differently than noted above. Only the
 ``_SAVE_AS`` settings are available, but it is available for any direct
@@ -619,7 +584,37 @@ template.
 
 URLs for direct template pages are theme-dependent. Some themes use
 corresponding ``*_URL`` setting as string, while others hard-code them:
-``'archives.html'``, ``'authors.html'``, ``'categories.html'``, ``'tags.html'``.
+``'archives.html'``, ``'authors.html'``, ``'categories.html'``,
+``'tags.html'``.
+
+.. data:: SLUG_REGEX_SUBSTITUTIONS = [
+        (r'[^\w\s-]', ''),  # remove non-alphabetical/whitespace/'-' chars
+        (r'(?u)\A\s*', ''),  # strip leading whitespace
+        (r'(?u)\s*\Z', ''),  # strip trailing whitespace
+        (r'[-\s]+', '-'),  # reduce multiple whitespace or '-' to single '-'
+    ]
+
+   Regex substitutions to make when generating slugs of articles and pages.
+   Specified as a list of pairs of ``(from, to)`` which are applied in order,
+   ignoring case. The default substitutions have the effect of removing
+   non-alphanumeric characters and converting internal whitespace to dashes.
+   Apart from these substitutions, slugs are always converted to lowercase
+   ascii characters and leading and trailing whitespace is stripped. Useful for
+   backward compatibility with existing URLs.
+
+.. data:: AUTHOR_REGEX_SUBSTITUTIONS = SLUG_REGEX_SUBSTITUTIONS
+
+   Regex substitutions for author slugs. Defaults to
+   ``SLUG_REGEX_SUBSTITUTIONS``.
+
+.. data:: CATEGORY_REGEX_SUBSTITUTIONS = SLUG_REGEX_SUBSTITUTIONS
+
+   Regex substitutions for category slugs. Defaults to
+   ``SLUG_REGEX_SUBSTITUTIONS``.
+
+.. data:: TAG_REGEX_SUBSTITUTIONS = SLUG_REGEX_SUBSTITUTIONS
+
+   Regex substitutions for tag slugs. Defaults to ``SLUG_REGEX_SUBSTITUTIONS``.
 
 Time and Date
 =============
@@ -791,13 +786,13 @@ Metadata
    unlike some other Pelican file settings.
 
 Not all metadata needs to be :ref:`embedded in source file itself
-<internal_metadata>`. For example, blog posts are often named
-following a ``YYYY-MM-DD-SLUG.rst`` pattern, or nested into
-``YYYY/MM/DD-SLUG`` directories. To extract metadata from the
-filename or path, set ``FILENAME_METADATA`` or ``PATH_METADATA`` to
-regular expressions that use Python's `group name notation`_ ``(?P<name>…)``.
-If you want to attach additional metadata but don't want to encode
-it in the path, you can set ``EXTRA_PATH_METADATA``:
+<internal_metadata>`. For example, blog posts are often named following a
+``YYYY-MM-DD-SLUG.rst`` pattern, or nested into ``YYYY/MM/DD-SLUG``
+directories. To extract metadata from the filename or path, set
+``FILENAME_METADATA`` or ``PATH_METADATA`` to regular expressions that use
+Python's `group name notation`_ ``(?P<name>…)``. If you want to attach
+additional metadata but don't want to encode it in the path, you can set
+``EXTRA_PATH_METADATA``:
 
 .. parsed-literal::
 
@@ -811,8 +806,8 @@ it in the path, you can set ``EXTRA_PATH_METADATA``:
             },
         }
 
-This can be a convenient way to shift the installed location of a
-particular file:
+This can be a convenient way to shift the installed location of a particular
+file:
 
 .. parsed-literal::
 
@@ -836,8 +831,8 @@ Feed settings
 By default, Pelican uses Atom feeds. However, it is also possible to use RSS
 feeds if you prefer.
 
-Pelican generates category feeds as well as feeds for all your articles. It does
-not generate feeds for tags by default, but it is possible to do so using
+Pelican generates category feeds as well as feeds for all your articles. It
+does not generate feeds for tags by default, but it is possible to do so using
 the ``TAG_FEED_ATOM`` and ``TAG_FEED_RSS`` settings:
 
 .. data:: FEED_DOMAIN = None, i.e. base URL is "/"
@@ -886,59 +881,61 @@ the ``TAG_FEED_ATOM`` and ``TAG_FEED_RSS`` settings:
    Relative URL of the all-posts RSS feed. If not set, ``FEED_ALL_RSS`` is used
    both for save location and URL.
 
-.. data:: CATEGORY_FEED_ATOM = 'feeds/%s.atom.xml'
+.. data:: CATEGORY_FEED_ATOM = 'feeds/{slug}.atom.xml'
 
    The location to save the category Atom feeds. [2]_
 
 .. data:: CATEGORY_FEED_ATOM_URL = None
 
-   Relative URL of the category Atom feeds, including the ``%s`` placeholder.
-   [2]_ If not set, ``CATEGORY_FEED_ATOM`` is used both for save location and
-   URL.
+   Relative URL of the category Atom feeds, including the ``{slug}``
+   placeholder. [2]_ If not set, ``CATEGORY_FEED_ATOM`` is used both for save
+   location and URL.
 
 .. data:: CATEGORY_FEED_RSS = None, i.e. no RSS
 
-   The location to save the category RSS feeds, including the ``%s``
+   The location to save the category RSS feeds, including the ``{slug}``
    placeholder. [2]_
 
 .. data:: CATEGORY_FEED_RSS_URL = None
 
-   Relative URL of the category RSS feeds, including the ``%s`` placeholder.
-   [2]_ If not set, ``CATEGORY_FEED_RSS`` is used both for save location and
-   URL.
+   Relative URL of the category RSS feeds, including the ``{slug}``
+   placeholder. [2]_ If not set, ``CATEGORY_FEED_RSS`` is used both for save
+   location and URL.
 
-.. data:: AUTHOR_FEED_ATOM = 'feeds/%s.atom.xml'
+.. data:: AUTHOR_FEED_ATOM = 'feeds/{slug}.atom.xml'
 
    The location to save the author Atom feeds. [2]_
 
 .. data:: AUTHOR_FEED_ATOM_URL = None
 
-   Relative URL of the author Atom feeds, including the ``%s`` placeholder.
+   Relative URL of the author Atom feeds, including the ``{slug}`` placeholder.
    [2]_ If not set, ``AUTHOR_FEED_ATOM`` is used both for save location and
    URL.
 
-.. data:: AUTHOR_FEED_RSS = 'feeds/%s.rss.xml'
+.. data:: AUTHOR_FEED_RSS = 'feeds/{slug}.rss.xml'
 
    The location to save the author RSS feeds. [2]_
 
 .. data:: AUTHOR_FEED_RSS_URL = None
 
-   Relative URL of the author RSS feeds, including the ``%s`` placeholder. [2]_
-   If not set, ``AUTHOR_FEED_RSS`` is used both for save location and URL.
+   Relative URL of the author RSS feeds, including the ``{slug}`` placeholder.
+   [2]_ If not set, ``AUTHOR_FEED_RSS`` is used both for save location and URL.
 
 .. data:: TAG_FEED_ATOM = None, i.e. no tag feed
 
-   The location to save the tag Atom feed, including the ``%s`` placeholder.
-   [2]_
+   The location to save the tag Atom feed, including the ``{slug}``
+   placeholder. [2]_
 
 .. data:: TAG_FEED_ATOM_URL = None
 
-   Relative URL of the tag Atom feed, including the ``%s`` placeholder. [2]_
+   Relative URL of the tag Atom feed, including the ``{slug}`` placeholder.
+   [2]_
 
 .. data:: TAG_FEED_RSS = None, i.e. no RSS tag feed
 
-   Relative URL to output the tag RSS feed, including the ``%s`` placeholder.
-   If not set, ``TAG_FEED_RSS`` is used both for save location and URL.
+   Relative URL to output the tag RSS feed, including the ``{slug}``
+   placeholder. If not set, ``TAG_FEED_RSS`` is used both for save location and
+   URL.
 
 .. data:: FEED_MAX_ITEMS
 
@@ -951,9 +948,10 @@ the ``TAG_FEED_ATOM`` and ``TAG_FEED_RSS`` settings:
    to ``False``, the full content will be included instead. This setting
    doesn't affect Atom feeds, only RSS ones.
 
-If you don't want to generate some or any of these feeds, set the above variables to ``None``.
+If you don't want to generate some or any of these feeds, set the above
+variables to ``None``.
 
-.. [2] ``%s`` is replaced by name of the category / author / tag.
+.. [2] ``{slug}`` is replaced by name of the category / author / tag.
 
 
 FeedBurner
@@ -961,17 +959,18 @@ FeedBurner
 
 If you want to use FeedBurner for your feed, you will likely need to decide
 upon a unique identifier. For example, if your site were called "Thyme" and
-hosted on the www.example.com domain, you might use "thymefeeds" as your
-unique identifier, which we'll use throughout this section for illustrative
-purposes. In your Pelican settings, set the ``FEED_ATOM`` attribute to
+hosted on the www.example.com domain, you might use "thymefeeds" as your unique
+identifier, which we'll use throughout this section for illustrative purposes.
+In your Pelican settings, set the ``FEED_ATOM`` attribute to
 ``thymefeeds/main.xml`` to create an Atom feed with an original address of
 ``http://www.example.com/thymefeeds/main.xml``. Set the ``FEED_DOMAIN``
-attribute to ``http://feeds.feedburner.com``, or ``http://feeds.example.com`` if
-you are using a CNAME on your own domain (i.e., FeedBurner's "MyBrand" feature).
+attribute to ``http://feeds.feedburner.com``, or ``http://feeds.example.com``
+if you are using a CNAME on your own domain (i.e., FeedBurner's "MyBrand"
+feature).
 
 There are two fields to configure in the `FeedBurner
-<http://feedburner.google.com>`_ interface: "Original Feed" and "Feed
-Address". In this example, the "Original Feed" would be
+<http://feedburner.google.com>`_ interface: "Original Feed" and "Feed Address".
+In this example, the "Original Feed" would be
 ``http://www.example.com/thymefeeds/main.xml`` and the "Feed Address" suffix
 would be ``thymefeeds/main.xml``.
 
@@ -979,10 +978,10 @@ would be ``thymefeeds/main.xml``.
 Pagination
 ==========
 
-The default behaviour of Pelican is to list all the article titles along
-with a short description on the index page. While this works well for
-small-to-medium sites, sites with a large quantity of articles will probably
-benefit from paginating this list.
+The default behaviour of Pelican is to list all the article titles along with a
+short description on the index page. While this works well for small-to-medium
+sites, sites with a large quantity of articles will probably benefit from
+paginating this list.
 
 You can use the following settings to configure the pagination.
 
@@ -1001,7 +1000,10 @@ You can use the following settings to configure the pagination.
    The templates to use pagination with, and the number of articles to include
    on a page. If this value is ``None``, it defaults to ``DEFAULT_PAGINATION``.
 
-.. data:: PAGINATION_PATTERNS
+.. data:: PAGINATION_PATTERNS = (
+      (1, '{name}{extension}', '{name}{extension}'),
+      (2, '{name}{number}{extension}', '{name}{number}{extension}'),
+  )
 
    A set of patterns that are used to determine advanced pagination output.
 
@@ -1009,43 +1011,58 @@ You can use the following settings to configure the pagination.
 Using Pagination Patterns
 -------------------------
 
-The ``PAGINATION_PATTERNS`` setting can be used to configure where
-subsequent pages are created. The setting is a sequence of three
-element tuples, where each tuple consists of::
+By default, pages subsequent to ``.../foo.html`` are created as
+``.../foo2.html``, etc. The ``PAGINATION_PATTERNS`` setting can be used to
+change this. It takes a sequence of triples, where each triple consists of::
 
-  (minimum page, URL setting, SAVE_AS setting,)
+  (minimum_page, page_url, page_save_as,)
 
-For example, if you wanted the first page to just be ``/``, and the
-second (and subsequent) pages to be ``/page/2/``, you would set
-``PAGINATION_PATTERNS`` as follows::
+For ``page_url`` and ``page_save_as``, you may use a number of variables.
+``{url}`` and ``{save_as}`` correspond respectively to the ``*_URL`` and
+``*_SAVE_AS`` values of the corresponding page type (e.g. ``ARTICLE_SAVE_AS``).
+If ``{save_as} == foo/bar.html``, then ``{name} == foo/bar`` and ``{extension}
+== .html``. ``{base_name}`` equals ``{name}`` except that it strips trailing
+``/index`` if present. ``{number}`` equals the page number.
+
+For example, if you want to leave the first page unchanged, but place
+subsequent pages at ``.../page/2/`` etc, you could set ``PAGINATION_PATTERNS``
+as follows::
 
   PAGINATION_PATTERNS = (
-      (1, '{base_name}/', '{base_name}/index.html'),
+      (1, '{url}', '{save_as}`,
       (2, '{base_name}/page/{number}/', '{base_name}/page/{number}/index.html'),
   )
-
-This would cause the first page to be written to
-``{base_name}/index.html``, and subsequent ones would be written into
-``page/{number}`` directories.
 
 
 Translations
 ============
 
-Pelican offers a way to translate articles. See the :doc:`Content <content>` section for
-more information.
+Pelican offers a way to translate articles. See the :doc:`Content <content>`
+section for more information.
 
 .. data:: DEFAULT_LANG = 'en'
 
    The default language to use.
 
-.. data:: TRANSLATION_FEED_ATOM = 'feeds/all-%s.atom.xml'
+.. data:: ARTICLE_TRANSLATION_ID = 'slug'
+
+   The metadata attribute(s) used to identify which articles are translations
+   of one another. May be a string or a collection of strings. Set to ``None``
+   or ``False`` to disable the identification of translations.
+
+.. data:: PAGE_TRANSLATION_ID = 'slug'
+
+   The metadata attribute(s) used to identify which pages are translations of
+   one another. May be a string or a collection of strings. Set to ``None`` or
+   ``False`` to disable the identification of translations.
+
+.. data:: TRANSLATION_FEED_ATOM = 'feeds/all-{lang}.atom.xml'
 
    The location to save the Atom feed for translations. [3]_
 
 .. data:: TRANSLATION_FEED_ATOM_URL = None
 
-   Relative URL of the Atom feed for translations, including the ``%s``
+   Relative URL of the Atom feed for translations, including the ``{lang}``
    placeholder. [3]_ If not set, ``TRANSLATION_FEED_ATOM`` is used both for
    save location and URL.
 
@@ -1055,11 +1072,11 @@ more information.
 
 .. data:: TRANSLATION_FEED_RSS_URL = None
 
-   Relative URL of the RSS feed for translations, including the ``%s``
+   Relative URL of the RSS feed for translations, including the ``{lang}``
    placeholder. [3]_ If not set, ``TRANSLATION_FEED_RSS`` is used both for save
    location and URL.
 
-.. [3] %s is the language
+.. [3] {lang} is the language code
 
 
 Ordering content
@@ -1095,8 +1112,9 @@ Ordering content
 Themes
 ======
 
-Creating Pelican themes is addressed in a dedicated section (see :ref:`theming-pelican`).
-However, here are the settings that are related to themes.
+Creating Pelican themes is addressed in a dedicated section (see
+:ref:`theming-pelican`). However, here are the settings that are related to
+themes.
 
 .. data:: THEME
 
@@ -1141,11 +1159,13 @@ setting or by passing the ``-t`` option to the ``pelican`` command:
 * notmyidea
 * simple (a synonym for "plain text" :)
 
-There are a number of other themes available at https://github.com/getpelican/pelican-themes.
-Pelican comes with :doc:`pelican-themes`, a small script for managing themes.
+There are a number of other themes available at
+https://github.com/getpelican/pelican-themes. Pelican comes with
+:doc:`pelican-themes`, a small script for managing themes.
 
-You can define your own theme, either by starting from scratch or by duplicating
-and modifying a pre-existing theme. Here is :doc:`a guide on how to create your theme <themes>`.
+You can define your own theme, either by starting from scratch or by
+duplicating and modifying a pre-existing theme. Here is :doc:`a guide on how to
+create your theme <themes>`.
 
 Following are example ways to specify your preferred theme::
 
@@ -1158,8 +1178,8 @@ Following are example ways to specify your preferred theme::
     # Specify a customized theme, via absolute path
     THEME = "/home/myuser/projects/mysite/themes/mycustomtheme"
 
-The built-in ``notmyidea`` theme can make good use of the following settings. Feel
-free to use them in your themes as well.
+The built-in ``notmyidea`` theme can make good use of the following settings.
+Feel free to use them in your themes as well.
 
 .. data:: SITESUBTITLE
 
@@ -1245,9 +1265,9 @@ can be quite tricky. In order to filter out redundant log messages, Pelican
 comes with the ``LOG_FILTER`` setting.
 
 ``LOG_FILTER`` should be a list of tuples ``(level, msg)``, each of them being
-composed of the logging level (up to ``warning``) and the message to be ignored.
-Simply populate the list with the log messages you want to hide, and they will
-be filtered out.
+composed of the logging level (up to ``warning``) and the message to be
+ignored. Simply populate the list with the log messages you want to hide, and
+they will be filtered out.
 
 For example::
     
@@ -1263,6 +1283,7 @@ For example::
    LOG_FILTER = [(logging.WARN, 'Empty alt attribute for image %s in %s')]
 
 .. Warning::
+
    Silencing messages by templates is a dangerous feature. It is possible to
    unintentionally filter out multiple message types with the same template
    (including messages from future Pelican versions). Proceed with caution.
@@ -1277,16 +1298,15 @@ For example::
 Reading only modified content
 =============================
 
-To speed up the build process, Pelican can optionally read only articles
-and pages with modified content.
+To speed up the build process, Pelican can optionally read only articles and
+pages with modified content.
 
 When Pelican is about to read some content source file:
 
 1. The hash or modification time information for the file from a
-   previous build are loaded from a cache file if ``LOAD_CONTENT_CACHE``
-   is ``True``. These files are stored in the ``CACHE_PATH``
-   directory.  If the file has no record in the cache file, it is read
-   as usual.
+   previous build are loaded from a cache file if ``LOAD_CONTENT_CACHE`` is
+   ``True``. These files are stored in the ``CACHE_PATH`` directory.  If the
+   file has no record in the cache file, it is read as usual.
 2. The file is checked according to ``CHECK_MODIFIED_METHOD``:
 
     - If set to ``'mtime'``, the modification time of the file is
@@ -1294,47 +1314,45 @@ When Pelican is about to read some content source file:
     - If set to a name of a function provided by the ``hashlib``
       module, e.g. ``'md5'``, the file hash is checked.
     - If set to anything else or the necessary information about the
-      file cannot be found in the cache file, the content is read as
-      usual.
+      file cannot be found in the cache file, the content is read as usual.
 
 3. If the file is considered unchanged, the content data saved in a
-   previous build corresponding to the file is loaded from the cache,
-   and the file is not read.
+   previous build corresponding to the file is loaded from the cache, and the
+   file is not read.
 4. If the file is considered changed, the file is read and the new
-   modification information and the content data are saved to the
-   cache if ``CACHE_CONTENT`` is ``True``.
+   modification information and the content data are saved to the cache if
+   ``CACHE_CONTENT`` is ``True``.
 
-If ``CONTENT_CACHING_LAYER`` is set to ``'reader'`` (the default),
-the raw content and metadata returned by a reader are cached. If this
-setting is instead set to ``'generator'``, the processed content
-object is cached. Caching the processed content object may conflict
-with plugins (as some reading related signals may be skipped) and the
-``WITH_FUTURE_DATES`` functionality (as the ``draft`` status of the
-cached content objects would not change automatically over time).
+If ``CONTENT_CACHING_LAYER`` is set to ``'reader'`` (the default), the raw
+content and metadata returned by a reader are cached. If this setting is
+instead set to ``'generator'``, the processed content object is cached. Caching
+the processed content object may conflict with plugins (as some reading related
+signals may be skipped) and the ``WITH_FUTURE_DATES`` functionality (as the
+``draft`` status of the cached content objects would not change automatically
+over time).
 
-Checking modification times is faster than comparing file hashes,
-but it is not as reliable because ``mtime`` information can be lost,
-e.g., when copying content source files using the ``cp`` or ``rsync``
-commands without the ``mtime`` preservation mode (which for ``rsync``
-can be invoked by passing the ``--archive`` flag).
+Checking modification times is faster than comparing file hashes, but it is not
+as reliable because ``mtime`` information can be lost, e.g., when copying
+content source files using the ``cp`` or ``rsync`` commands without the
+``mtime`` preservation mode (which for ``rsync`` can be invoked by passing the
+``--archive`` flag).
 
-The cache files are Python pickles, so they may not be readable by
-different versions of Python as the pickle format often changes. If
-such an error is encountered, it is caught and the cache file is
-rebuilt automatically in the new format. The cache files will also be
-rebuilt after the ``GZIP_CACHE`` setting has been changed.
+The cache files are Python pickles, so they may not be readable by different
+versions of Python as the pickle format often changes. If such an error is
+encountered, it is caught and the cache file is rebuilt automatically in the
+new format. The cache files will also be rebuilt after the ``GZIP_CACHE``
+setting has been changed.
 
-The ``--ignore-cache`` command-line option is useful when the
-whole cache needs to be regenerated, such as when making modifications
-to the settings file that will affect the cached content, or just for
-debugging purposes. When Pelican runs in autoreload mode, modification
-of the settings file will make it ignore the cache automatically if
-``AUTORELOAD_IGNORE_CACHE`` is ``True``.
+The ``--ignore-cache`` command-line option is useful when the whole cache needs
+to be regenerated, such as when making modifications to the settings file that
+will affect the cached content, or just for debugging purposes. When Pelican
+runs in autoreload mode, modification of the settings file will make it ignore
+the cache automatically if ``AUTORELOAD_IGNORE_CACHE`` is ``True``.
 
-Note that even when using cached content, all output is always
-written, so the modification times of the generated ``*.html`` files
-will always change. Therefore, ``rsync``-based uploading may benefit
-from the ``--checksum`` option.
+Note that even when using cached content, all output is always written, so the
+modification times of the generated ``*.html`` files will always change.
+Therefore, ``rsync``-based uploading may benefit from the ``--checksum``
+option.
 
 .. _writing_only_selected_content:
 
@@ -1342,16 +1360,14 @@ from the ``--checksum`` option.
 Writing only selected content
 =============================
 
-When only working on a single article or page, or making tweaks to
-your theme, it is often desirable to generate and review your work
-as quickly as possible. In such cases, generating and writing the
-entire site output is often unnecessary. By specifying only the
-desired files as output paths in the ``WRITE_SELECTED`` list,
-**only** those files will be written. This list can be also specified
-on the command line using the ``--write-selected`` option, which
-accepts a comma-separated list of output file paths. By default this
-list is empty, so all output is written. See :ref:`site_generation` for
-more details.
+When only working on a single article or page, or making tweaks to your theme,
+it is often desirable to generate and review your work as quickly as possible.
+In such cases, generating and writing the entire site output is often
+unnecessary. By specifying only the desired files as output paths in the
+``WRITE_SELECTED`` list, **only** those files will be written. This list can be
+also specified on the command line using the ``--write-selected`` option, which
+accepts a comma-separated list of output file paths. By default this list is
+empty, so all output is written. See :ref:`site_generation` for more details.
 
 
 Example settings

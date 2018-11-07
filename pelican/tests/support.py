@@ -17,6 +17,7 @@ from tempfile import mkdtemp
 from six import StringIO
 
 from pelican.contents import Article
+from pelican.readers import default_metadata
 from pelican.settings import DEFAULT_CONFIG
 
 __all__ = ['get_article', 'unittest', ]
@@ -113,9 +114,10 @@ def mute(returns_output=False):
     return decorator
 
 
-def get_article(title, slug, content, lang, extra_metadata=None):
-    metadata = {'slug': slug, 'title': title, 'lang': lang}
-    if extra_metadata is not None:
+def get_article(title, content, **extra_metadata):
+    metadata = default_metadata(settings=DEFAULT_CONFIG)
+    metadata['title'] = title
+    if extra_metadata:
         metadata.update(extra_metadata)
     return Article(content, metadata=metadata)
 
@@ -171,6 +173,15 @@ def get_settings(**kwargs):
     for key, value in kwargs.items():
         settings[key] = value
     return settings
+
+
+def get_context(settings=None, **kwargs):
+    context = settings.copy() if settings else {}
+    context['generated_content'] = {}
+    context['static_links'] = set()
+    context['static_content'] = {}
+    context.update(kwargs)
+    return context
 
 
 class LogCountHandler(BufferingHandler):

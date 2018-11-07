@@ -1,7 +1,11 @@
 # -*- coding: utf-8 -*-
 from __future__ import print_function, unicode_literals
 
-import collections
+try:
+    import collections.abc as collections
+except ImportError:
+    import collections
+
 import locale
 import logging
 import os
@@ -108,7 +112,7 @@ class TestPelican(LoggedTestCase):
         self.assertDirsEqual(
             self.temp_path, os.path.join(OUTPUT_PATH, 'basic'))
         self.assertLogCountEqual(
-            count=3,
+            count=1,
             msg="Unable to find.*skipping url replacement",
             level=logging.WARNING)
 
